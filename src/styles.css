@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/dist/css/bootstrap.css";
+body {
+    background-color: rgb(255, 255, 255);
+}
+
+label {
+    font-weight: bolder;
+}
+
+.inputArea {
+    background-color: rgb(255, 217, 217);
+}
