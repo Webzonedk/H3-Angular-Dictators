@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { GetService } from '../services/get.service';
-import { PostService } from '../services/post.service';
+import { CrudService } from '../services/crud.service';
 import { Dictator } from '../interfaces/dictator';
 
 @Component({
@@ -10,8 +9,8 @@ import { Dictator } from '../interfaces/dictator';
   styleUrls: ['./editDictator.component.css']
 })
 export class EditDictatorComponent implements OnInit {
-
-  constructor(private formBuilder: FormBuilder, private postService: PostService, private getService: GetService) { }
+  constructor(private formBuilder: FormBuilder, private crudService: CrudService) {
+   }
 
   title = 'dictators';
   addDiktatorForm = this.formBuilder.group({
@@ -28,9 +27,11 @@ export class EditDictatorComponent implements OnInit {
 
 
   submit() {
-    this.postService.postDictator(this.addDiktatorForm.value).subscribe(() => { })
+    this.crudService.postDictator(this.addDiktatorForm.value).subscribe(() => { })
 
     location.reload();
   }
 
 }
+
+

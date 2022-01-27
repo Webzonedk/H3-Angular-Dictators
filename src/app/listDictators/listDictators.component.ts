@@ -1,8 +1,8 @@
 import { HttpClient} from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Dictator } from '../interfaces/dictator';
-import { GetService } from '../services/get.service';
-import { PostService } from '../services/post.service';
+import { CrudService } from '../services/crud.service';
+//import { PostService } from '../services/old_post.service';
 
 @Component({
   selector: 'app-listDictators',
@@ -10,16 +10,16 @@ import { PostService } from '../services/post.service';
   styleUrls: ['./listDictators.component.css']
 })
 export class ListDictatorsComponent implements OnInit {
-  dictators: Dictator[] = [];
+  public dictators: Dictator[] = [];
   ApiURL: string ="http://localhost:3000/postDictators"
-  constructor(private getService: GetService, private postService: PostService) {
 
+  constructor(private crudService: CrudService) {
   }
 
 
   ngOnInit(): void {
     //Getting the dictators from the getService and adding them to the array dictators
-    this.getService.getDictators().subscribe((dictator: Dictator[]) => {
+    this.crudService.getDictators().subscribe((dictator: Dictator[]) => {
       next: this.dictators = dictator;
 
       console.log(dictator);
@@ -32,7 +32,7 @@ export class ListDictatorsComponent implements OnInit {
 
   delete(index: number) {
 
-    this.postService.deleteDictator(index).subscribe(() => {
+    this.crudService.deleteDictator(index).subscribe(() => {
 
      });
 
