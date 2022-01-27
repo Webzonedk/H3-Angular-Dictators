@@ -14,6 +14,7 @@ export class EditDictatorComponent implements OnInit {
 
   title = 'dictators';
   addDiktatorForm = this.formBuilder.group({
+   // index:[this.crudService.dictators.length],
     firstName: [``, Validators.required],
     lastName: [``, Validators.required],
     birth: [``, Validators.required],
@@ -27,9 +28,12 @@ export class EditDictatorComponent implements OnInit {
 
 
   submit() {
-    this.crudService.postDictator(this.addDiktatorForm.value).subscribe(() => { })
+    this.crudService.postDictator(this.addDiktatorForm.value).subscribe((dictator: Dictator[]) => {
+      next: this.crudService.dictators = dictator;
 
-    location.reload();
+     });
+
+
   }
 
 }

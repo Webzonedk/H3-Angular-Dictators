@@ -1,14 +1,17 @@
 import { Dictator } from '../interfaces/dictator'
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs';
+import { JsonPipe } from '@angular/common';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class CrudService {
+  dictators: Dictator[] = [];
 
   ApiURL: string = "http://localhost:3000"
   constructor(private http: HttpClient) {
@@ -25,12 +28,15 @@ export class CrudService {
   }
 
   deleteDictator(i: any) {
-    return this.http.delete<Dictator[]>(this.ApiURL+`/deleteDictators`, i)
+    return this.http.delete<any>(this.ApiURL+`/deleteDictators/${i}`, i)
   }
 
   updateDictator(){
-    //Not implemented yet
+    //Not implemented
   }
 
+  getDictatorsArray() {
+    return this.dictators.slice();
+  }
 
 }

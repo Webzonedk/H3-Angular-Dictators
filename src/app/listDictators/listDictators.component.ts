@@ -1,8 +1,7 @@
-import { HttpClient} from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
 import { Dictator } from '../interfaces/dictator';
 import { CrudService } from '../services/crud.service';
-//import { PostService } from '../services/old_post.service';
 
 @Component({
   selector: 'app-listDictators',
@@ -10,31 +9,45 @@ import { CrudService } from '../services/crud.service';
   styleUrls: ['./listDictators.component.css']
 })
 export class ListDictatorsComponent implements OnInit {
-  public dictators: Dictator[] = [];
-  ApiURL: string ="http://localhost:3000/postDictators"
+ // ApiURL: string = "http://localhost:3000/postDictators"
+  dictators: Dictator[] = [];
 
   constructor(private crudService: CrudService) {
   }
 
 
   ngOnInit(): void {
+    this.dictators = this.crudService.getDictatorsArray();
     //Getting the dictators from the getService and adding them to the array dictators
     this.crudService.getDictators().subscribe((dictator: Dictator[]) => {
       next: this.dictators = dictator;
-
-      console.log(dictator);
+     // console.log(dictator);
     });
+
+
   }
 
 
 
   delete(index: number) {
-    this.crudService.deleteDictator(index).subscribe(() => {
-     });
-
+    const test = {'index': index};
+    console.log("delete",index);
     this.dictators.splice(index, 1);
 
-        location.reload();
+   // console.log(index);
+    this.crudService.deleteDictator(index).subscribe(() => {
+    });
+    // location.reload();
+
+
+    this.crudService.getDictators().subscribe((dictator: Dictator[]) => {
+      next: this.crudService.dictators = dictator;
+
+     // console.log(dictator);
+    });
   }
 
 }
+
+
+
