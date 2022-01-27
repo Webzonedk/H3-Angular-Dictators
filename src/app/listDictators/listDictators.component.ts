@@ -23,19 +23,14 @@ export class ListDictatorsComponent implements OnInit {
       next: this.dictators = dictator;
 
       console.log(dictator);
-
-
     });
   }
 
 
 
   delete(index: number) {
-
     this.crudService.deleteDictator(index).subscribe(() => {
-
      });
-
 
     this.dictators.splice(index, 1);
 
