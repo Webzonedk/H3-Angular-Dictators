@@ -1,8 +1,7 @@
 import { Dictator } from '../interfaces/dictator'
 import { HttpClient } from '@angular/common/http';
-import { Injectable, Input } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { JsonPipe } from '@angular/common';
 
 
 
@@ -11,9 +10,11 @@ import { JsonPipe } from '@angular/common';
 })
 
 export class CrudService {
+  //Creating an array to keep the dictators behind bars
   dictators: Dictator[] = [];
-
+//The url for the API
   ApiURL: string = "http://localhost:3000"
+
   constructor(private http: HttpClient) {
 
   }

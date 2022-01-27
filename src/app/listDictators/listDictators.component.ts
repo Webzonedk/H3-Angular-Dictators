@@ -23,8 +23,6 @@ export class ListDictatorsComponent implements OnInit {
       next: this.dictators = dictator;
      // console.log(dictator);
     });
-
-
   }
 
 
@@ -33,13 +31,14 @@ export class ListDictatorsComponent implements OnInit {
     const test = {'index': index};
     console.log("delete",index);
     this.dictators.splice(index, 1);
-
    // console.log(index);
+
+   //Use the crudService to execute the deletion
     this.crudService.deleteDictator(index).subscribe(() => {
     });
     // location.reload();
 
-
+//This has no influence
     this.crudService.getDictators().subscribe((dictator: Dictator[]) => {
       next: this.crudService.dictators = dictator;
 

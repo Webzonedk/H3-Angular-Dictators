@@ -8,13 +8,14 @@ import { Dictator } from '../interfaces/dictator';
   templateUrl: './editDictator.component.html',
   styleUrls: ['./editDictator.component.css']
 })
+
 export class EditDictatorComponent implements OnInit {
+
   constructor(private formBuilder: FormBuilder, private crudService: CrudService) {
    }
 
   title = 'dictators';
   addDiktatorForm = this.formBuilder.group({
-   // index:[this.crudService.dictators.length],
     firstName: [``, Validators.required],
     lastName: [``, Validators.required],
     birth: [``, Validators.required],
@@ -26,14 +27,12 @@ export class EditDictatorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+//Use the crudService to post the dictator from the form
   submit() {
     this.crudService.postDictator(this.addDiktatorForm.value).subscribe((dictator: Dictator[]) => {
       next: this.crudService.dictators = dictator;
 
      });
-
-
   }
 
 }
