@@ -1,3 +1,4 @@
+import { HandleDictatorsService } from '../services/handle-dictators.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Dictator } from '../interfaces/dictator';
@@ -9,21 +10,42 @@ import { CrudService } from '../services/crud.service';
   styleUrls: ['./listDictators.component.css']
 })
 export class ListDictatorsComponent implements OnInit {
- // ApiURL: string = "http://localhost:3000/postDictators"
+  // ApiURL: string = "http://localhost:3000/postDictators"
   dictators: Dictator[] = [];
+  //ready: boolean = false;
 
-  constructor(private crudService: CrudService) {
+  constructor(private handleDictatorsService: HandleDictatorsService, private crudService: CrudService) {
+
+    this.handleDictatorsService.dictators$.subscribe((dictatorsData: Dictator[]) => {
+      next:
+      this.dictators = dictatorsData;
+      // if (this.dictators.length !== dictatorsData.length) {
+      // }
+
+    });
+
   }
 
 
   ngOnInit(): void {
-    this.dictators = this.crudService.getDictatorsArray();
-    //Getting the dictators from the getService and adding them to the array dictators
-    this.crudService.getDictators().subscribe((dictator: Dictator[]) => {
-      next: this.dictators = dictator;
-     // console.log(dictator);
-    });
+    // this.dictators = this.crudService.getDictatorsArray();
+    // //Getting the dictators from the getService and adding them to the array dictators
+    // this.crudService.getDictators().subscribe((dictator: Dictator[]) => {
+    //   next: this.dictators = dictator;
+    //  // console.log(dictator);
+    // });
+
+    this.loadDictators();
   }
+
+  loadDictators() {
+    this.handleDictatorsService.loadDictators();
+  }
+
+
+
+
+
 
 
 
@@ -31,19 +53,16 @@ export class ListDictatorsComponent implements OnInit {
     const test = {'index': index};
     console.log("delete",index);
     this.dictators.splice(index, 1);
-   // console.log(index);
 
-   //Use the crudService to execute the deletion
+
+    // console.log(index);
+
+    //Use the crudService to execute the deletion
     this.crudService.deleteDictator(index).subscribe(() => {
     });
     // location.reload();
 
-//This has no influence
-    this.crudService.getDictators().subscribe((dictator: Dictator[]) => {
-      next: this.crudService.dictators = dictator;
-
-     // console.log(dictator);
-    });
+    this.loadDictators();
   }
 
 }

@@ -10,8 +10,10 @@ import { Observable } from 'rxjs';
 })
 
 export class CrudService {
+
   //Creating an array to keep the dictators behind bars
-  dictators: Dictator[] = [];
+// dictators: Dictator[] = []; //not used anymore
+
 //The url for the API
   ApiURL: string = "http://localhost:3000"
 
@@ -37,7 +39,7 @@ export class CrudService {
   }
 
   getDictatorsArray() {
-    return this.dictators.slice();
+   // return this.dictators.slice();
   }
 
 }
