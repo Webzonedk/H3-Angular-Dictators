@@ -45,7 +45,7 @@ export class EditDictatorComponent implements OnInit {
      */
     console.debug('values', this.addDiktatorForm.value)
     this.handleDictatorsService.postDictators(this.addDiktatorForm.value);
-    this.handleDictatorsService.loadDictators();
+    //this.handleDictatorsService.loadDictators();
   }
 
 

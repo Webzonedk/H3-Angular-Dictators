@@ -12,6 +12,7 @@ import { CrudService } from '../services/crud.service';
 export class ListDictatorsComponent implements OnInit {
   // ApiURL: string = "http://localhost:3000/postDictators"
   dictators: Dictator[] = [];
+  //dirtyData: boolean = true;
   //ready: boolean = false;
 
   constructor(private handleDictatorsService: HandleDictatorsService, private crudService: CrudService) {
@@ -22,6 +23,13 @@ export class ListDictatorsComponent implements OnInit {
       if (this.dictators.length !== dictatorsData.length) {
         this.dictators = dictatorsData;
       }
+      /*
+      this.handleDictatorsService.dirtyData$.subscribe((b: boolean) => {
+        if(this.dirtyData !== b) {
+          this.dirtyData = b;
+        }
+      })
+      */
 
     });
 
@@ -40,6 +48,7 @@ export class ListDictatorsComponent implements OnInit {
   }
 
   loadDictators() {
+    //if(this.dirtyData)
     this.handleDictatorsService.loadDictators();
   }
 

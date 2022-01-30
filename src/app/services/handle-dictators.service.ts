@@ -65,7 +65,7 @@ export class HandleDictatorsService {
 
       complete:
       console.debug('complete')
-      this.dictators$.next(dictator);
+      this.dictators$.next(counter);
       //this.dirtyData$.next(false);
      // this.dictatorsReady$.next(true);
 
