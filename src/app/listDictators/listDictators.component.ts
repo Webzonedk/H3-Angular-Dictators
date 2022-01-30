@@ -18,9 +18,10 @@ export class ListDictatorsComponent implements OnInit {
 
     this.handleDictatorsService.dictators$.subscribe((dictatorsData: Dictator[]) => {
       next:
-      this.dictators = dictatorsData;
-      // if (this.dictators.length !== dictatorsData.length) {
-      // }
+      
+      if (this.dictators.length !== dictatorsData.length) {
+        this.dictators = dictatorsData;
+      }
 
     });
 
@@ -50,19 +51,24 @@ export class ListDictatorsComponent implements OnInit {
 
 
   delete(index: number) {
-    const test = {'index': index};
+    //const test = {'index': index};
     console.log("delete",index);
-    this.dictators.splice(index, 1);
+    /* Lad din observable tage sig af denne her */
+    //this.dictators.splice(index, 1);
 
 
     // console.log(index);
 
     //Use the crudService to execute the deletion
+    /* Den returnerede ikke fra webapi'et så din subscribe kom aldrig til oberveren complete
     this.crudService.deleteDictator(index).subscribe(() => {
     });
+    */
+   this.handleDictatorsService.deleteDictator(index);
     // location.reload();
 
-    this.loadDictators();
+    //Denne her lader vi complete observeren om i handleDictatorService.deleteDictator
+    //this.loadDictators();
   }
 
 }

@@ -28,15 +28,24 @@ export class EditDictatorComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /*
+  KBK: Se mine kommentarer i handler servicen
+  */
+
 //Use the crudService to post the dictator from the form
   submit() {
+    /*
     this.crudService.postDictator(this.addDiktatorForm.value).subscribe((dictator: Dictator[]) => {
      // next: this.crudService.dictators = dictator;
-
+      cmplete:
+      this.handleDictatorsService.loadDictators();
      });
 
+    //this.handleDictatorsService.loadDictators();
+     */
+    console.debug('values', this.addDiktatorForm.value)
+    this.handleDictatorsService.postDictators(this.addDiktatorForm.value);
     this.handleDictatorsService.loadDictators();
-
   }
 
 

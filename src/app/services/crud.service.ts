@@ -27,7 +27,8 @@ export class CrudService {
   }
 
   postDictator(dataToApi: any) {
-    return this.http.post<any>(this.ApiURL+`/postDictators`, dataToApi)
+    console.debug('dataToAPI', dataToApi)
+    return this.http.post<any>(this.ApiURL+'/postdictators', dataToApi);
   }
 
   deleteDictator(i: any) {
